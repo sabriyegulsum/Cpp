@@ -1,0 +1,83 @@
+c ve cpp farkları
+    c de struct student diye bir yapı ouşturduktan sonra tip oluştururken ya struct student diye oluşturulur ya da typedef ile yeni isim verilmesi gerekir
+    ama cpp de struct student dedikten sonta struct kısmını atıp student tipinde variable oluştururuz.
+
+    *** printf yerine cout kullanılır 
+    cout<<"hello world";
+    input icin 
+    cin>>a;
+    referans dedigimiz aynı pointer gibi fakat ilk tanımladığın yerde bir şye eşitlemen gerekiyor
+    int &ref=a;
+    sonra ref i fonk da alabilirim 
+    void fonk(int &i); bu şekilde tipi ve adres alacağını belirtip fonk(ref); çağırılır
+    
+    **dinamik bellekte malloc yerine new kullanılır
+            int *ptr=new int  //bu şekilde bir int lik yer ayırır 
+            int *ptr=new int[10]; //şelindede yazılabilir 10 yeerine int bir variable da yazılabilir.
+    free(ptr) yerinede delete ptr şeklinde kullanılır
+    eğere dizi tutulan alan dizi şelinde ise delete [] ptr; dizi olduğunu kenarda belirtiriz o kadar :)
+
+    *** dangling referans hatası diye bir şey var çok basit.Eğer pointerini delete lersen sonra onun ile işlem yapmaya çalışirsan oluşan hatadır
+    *** bir de int *ptr1,ptr2;      ptr1=ptr2   delete ptr1  dersen ptr2 ye ulaşamaya çalışırsan olmaz çünkü o da silinmiş bir öğeyi gösteriyor
+    *** for döngüsünde foreach ile her birini yazdırabiliriz 
+    int dizi[5]={1,2,3,4,5};
+    for(int item:dizi)
+        count<<item<<endl;          //forech dongusu 
+    *** fonksiyon overloding aynı fonksiyonu aşağılarda parametreli olarak yazıp kullanmaktır
+    void print(void)
+    {
+        cout<<"Hello World";
+    }
+    void print(string name)
+    {
+        cout<<"Hello"<<name;
+    }
+
+    namespace programci1{
+        int x=10;
+        void foo()
+        {
+            int x=3;
+        }
+    }
+
+    namespace bir scope açmaktır fonksiyonsuz mainden bağımsız
+    burada aynı fonksiyonu bir parametreli birde parametresiz oluşturdum.
+    namespace bir scope açmaktır fonksiyonsuz mainden bağımsız
+    bu scpoe bir projede çalışan farklı kişiler için kullanılabilir
+    aynı fonksiyon ismide olsa farklı uzaylarda olduğu için sorun olmaz
+    içerisindeki bir değeri yazdırırken aynı main gibi olur
+    //cout<<programci::x;
+    fonksiyon çağırıken de aynı main gibidir sadece ilk önce o uzaya erişmek gerekir
+    iki tane :: olmalı
+
+    ** eğer sınıftaki methodları(struct ta ki fonksiyonları)dışarıya çıkarmak istiyorsak class in içinde sadece prototipi kalır 
+    sonra aşağıya fonk un kendisi yazılr fakat nasıl???
+    class nokta{
+        void func(int );
+    };
+    void nokta:: func(int a)
+    {
+        :: scope operotorudur
+        ilk önce döndürülen tipi sonra o uzayın içine sonra bildiğimiz gibi adı ve parametreleri
+    }
+    ***birde public ve private konusu var 
+    class ta public mi private mı belirtmen gerekir yoksa hata verir 
+    eğer private deyip aşagısına bir değişken yazarsan sadece o scopta kullanabiilirsin başka türlü kullanamazsın
+    class nokta{
+        private :
+        int x;
+        public:
+        int y;
+    }
+    int main()
+    {
+        nokta n1;
+        cout<<n1.x; //burada hata verir  
+    }
+    birde protected var erişim sınıflarından kalıtım yoluyla türettiğimiz bazı sınıflarda kullanılabilir
+    frien class ve friend fonksiyon konusunu daha iyi anlamak için friend2 kodunu okuyabilirsin :))
+
+
+    
+
