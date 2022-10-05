@@ -1,1 +1,1 @@
-o
+ alır ve nesneyi ref & olarak alır
