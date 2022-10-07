@@ -9,12 +9,12 @@ class Nokta{
     Nokta(int ,int ,int);
     void info();
 };
-Nokta::Nokta():t(13)
+Nokta::Nokta():t(13)        //kurucu fonksiyona tanımlama şekli
 {
     x=1;
     y=2;
 }
-Nokta::Nokta(int x,int y=7,int t=13):t(t)
+Nokta::Nokta(int x,int y=7,int t=13):t(t)          //parametre olarak gelen t yi nesnenin içerisindeki t ye at
 {
     this->x=x;
     this->y=y;
