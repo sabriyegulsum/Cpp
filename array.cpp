@@ -6,30 +6,31 @@ class Array{
         int i;
     public:
         Array(int=1);
-        ~Array(){delete[] p; cout<<"destructor çalıştı"<<endl;}        //dizi olduğu için delete ederken [] konur
+        ~Array();       
         void print();
-        const int get()const {return i;}    //birinci const return edilen değer sabit olsun değişmesin der.ikinci const bu methodun herhangi bir özelliği
-                                            //değiştirmediğini ifade eder
+        const int get()const {return i;}    //birinci const return edilen değer sabit olsun değişmesin der.ikinci const bu methodun herhangi bir özelliği değiştirmediğini ifade eder
         Array sum(const Array &);
-        void setboyut(int i) {this->i=i;}
-        void set(int indis, int value)
-        {
-            if(indis<i)
-                p[indis]=value;
-        }
+        void setboyut(int);
+        void set(int ,int );
         int * adres();             
-                                    //kopyalama fonksiyonunda ismi classın isminde olmalı ve bir nesne içerisine atılmalı
-        Array(const Array&n)         //kopyalama fonksiyonu
+        Array(const Array&);        //copy constructor
+        Array carpma(const Array &);
+};
+void Array:: setboyut(int i){this->i=i; }
+Array:: ~Array(){delete[] p;}            //dizi olduğu için delete ederken [] konur
+void Array::set(int indis, int value)
+{
+    if(indis<i)
+    p[indis]=value;
+}                                 
+Array::Array(const Array&n)                 //kopyalama fonksiyonunda ismi classın isminde olmalı ve bir nesne içerisine atılmalı
         {                                  //bir var. oluştururup içerisine copy etmek istediğim bir nesne atıcam
-            this->i=n.i;                    
-            p=new int [i];                  //yeni oluşturduğum nesnenin pointerina yer aldım
+            this->i=n.i;                   //yeni oluşturduğum nesnenin pointerina yer aldım 
+            p=new int [i];                  
             for(int j=0;j<i;j++)
                 p[j]=n.p[j];
             cout<<"kopyalama işlemi gerçekleşti"<<endl;
         }
-};
-
-
 Array Array::sum(const Array &n)
 {
     if(i==n.i)
@@ -38,13 +39,10 @@ Array Array::sum(const Array &n)
         temp.i=n.i;     //yeni oluşturduğum temp nesnesininde boyutunu belirtmeliyiz
         for(int j=0;j<i;j++)
         temp.p[j]=p[j]+n.p[j]; //topladığını nerede saklayacaksın :)
-    return temp;
+        return temp;
     }
     else
         return 0;
-    
-    
-    
 }
 Array:: Array(int i):i(i)//kurucu fonksiyona i parametre olarak alınır ama i ye ilk değer atamasıda bu şekilde yapılır constan farklı olarak
         {
@@ -54,10 +52,8 @@ Array:: Array(int i):i(i)//kurucu fonksiyona i parametre olarak alınır ama i y
             //yapıyorım. buradada aynı mantık var.Fonksiyonun içnde farklı değerler alabilir sadece ilk değer ataması yapıyorum.ama eğer değer girmezse bu geçerli
             //peki içindeki bu i(i) de ne dersen o; eğer user bir değer girerse o girdiği değeri eşitle i sayısına demektir
             p=new int[i];          //pointer için yer alımı kurucu fonk.da
-
             cout<<i<<" elemanlı bir dizi oluşturuldu"<<endl;
         }
-
 void Array::print() 
 {
     for(int j=0;j<i;j++)
@@ -67,6 +63,18 @@ void Array::print()
 int *Array::adres()
 {
     return p;
+}
+Array Array::carpma(const Array& n)
+{
+    if(i==n.i)
+    {
+        Array temp(i);         //sonucu saklamak için.  temp.i=n.i bu şekildede boyut eşitlemesi yapılabilir
+        for(int j=0;j<i;j++)
+            temp.p[j]=p[j]*n.p[j];
+            return temp;
+    }
+    else 
+        return 0;
 }
 int main()
 {
@@ -83,6 +91,8 @@ int main()
     cout<<Array2.adres();
     cout<<endl<<endl;
     (Array1.sum(Array2)).print();
+    cout<<endl<<"carpma:\n";
+    (Array1.carpma(Array1)).print();
     
     return 0;
 }
