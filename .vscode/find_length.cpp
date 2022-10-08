@@ -24,5 +24,5 @@ int main()
     find_length cizgi(n,m);
     //cout<<n.sum()<<endl<<m.sum()<<endl;
     cout<<"iki  nokta arasındaki en kısa uzaklık:"<<cizgi.length();
-    return 0;
+    return 0
 }
